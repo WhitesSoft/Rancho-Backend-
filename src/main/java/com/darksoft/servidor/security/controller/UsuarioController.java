@@ -33,16 +33,16 @@ public class UsuarioController {
 
     //Listar los usuarios
     @GetMapping("/lista") //Nos damos un url para acceder luego
-    public ResponseEntity<List<Usuario>> listarSocios(){
+    public ResponseEntity<List<Usuario>> listarSocios() {
         List<Usuario> listaUsuarios = usuarioService.getAllUsuarios();
         return new ResponseEntity<>(listaUsuarios, HttpStatus.OK);
     }
 
     //Ver socio por id
     @GetMapping("/detalles/{id}")
-    public ResponseEntity<Usuario> getById(@PathVariable("id") long id){
+    public ResponseEntity<Usuario> getById(@PathVariable("id") long id) {
 
-        if(!usuarioService.existsById(id)) //Si no existe el socio retornamos un mensaje
+        if (!usuarioService.existsById(id)) //Si no existe el socio retornamos un mensaje
             return new ResponseEntity(new Mensaje("No existe el usuario"), HttpStatus.NOT_FOUND);
 
         Usuario usuario = usuarioService.getUsuario(id).get();
@@ -53,10 +53,10 @@ public class UsuarioController {
 
     //Editar usuario
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<?> updateUsuario (@PathVariable("id") long id, @RequestBody NuevoUsuario nuevoUsuario){
+    public ResponseEntity<?> updateUsuario(@PathVariable("id") long id, @RequestBody NuevoUsuario nuevoUsuario) {
 
         //primero verificamos si existe el socio
-        if(!usuarioService.existsById(id)) //Si no existe retornamos un mensaje
+        if (!usuarioService.existsById(id)) //Si no existe retornamos un mensaje
             return new ResponseEntity(new Mensaje("No existe el usuario"), HttpStatus.NOT_FOUND);
 
         Usuario usuario = usuarioService.getUsuario(id).get();
@@ -68,19 +68,19 @@ public class UsuarioController {
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
 
         //Verificamos como creamos el usuario como administrador
-        if(nuevoUsuario.getRoles().contains("administrador"))
+        if (nuevoUsuario.getRoles().contains("administrador"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMINISTRADOR).get());
 
         //Verificamos como creamos el usuario como cajero
-        if(nuevoUsuario.getRoles().contains("cajero"))
+        if (nuevoUsuario.getRoles().contains("cajero"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_CAJERO).get());
 
         //Verificamos como creamos el usuario como lecturador
-        if(nuevoUsuario.getRoles().contains("lecturador"))
+        if (nuevoUsuario.getRoles().contains("lecturador"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_LECTURADOR).get());
 
         //Verificamos como creamos el usuario como plomero
-        if(nuevoUsuario.getRoles().contains("plomero"))
+        if (nuevoUsuario.getRoles().contains("plomero"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_PLOMERO).get());
 
         usuario.setRoles(roles);
@@ -92,10 +92,10 @@ public class UsuarioController {
 
     //Eliminar usuario
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> deleteSocio (@PathVariable("id") long id){
+    public ResponseEntity<?> deleteSocio(@PathVariable("id") long id) {
 
         //primero verificamos si existe el socio
-        if(!usuarioService.existsById(id)) //Si no existe returnamos un mensaje
+        if (!usuarioService.existsById(id)) //Si no existe returnamos un mensaje
             return new ResponseEntity(new Mensaje("No existe el usuario"), HttpStatus.NOT_FOUND);
 
         usuarioService.delete(id);
