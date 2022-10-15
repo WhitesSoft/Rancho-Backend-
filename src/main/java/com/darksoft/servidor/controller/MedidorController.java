@@ -47,6 +47,7 @@ public class MedidorController {
 
         List<Medidor> listaMedidoresBySocio = medidorService.getAllMedidoresBySocio(id);
         return new ResponseEntity<>(listaMedidoresBySocio, HttpStatus.OK);
+
     }
 
     //Ver medidor por id
