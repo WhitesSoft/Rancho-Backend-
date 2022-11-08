@@ -50,4 +50,5 @@ public class MedidorService {
     public boolean existsById(long id){
         return medidorRepository.existsById(id);
     }
+
 }

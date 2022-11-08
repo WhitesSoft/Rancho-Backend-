@@ -1,9 +1,12 @@
 package com.darksoft.servidor.security.entity;
 
+import com.darksoft.servidor.entity.Comunicados;
 import com.darksoft.servidor.entity.Socio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -30,6 +33,10 @@ public class Usuario {
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
+
+    //Relacion con Comunicados
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Comunicados> comunicados = new ArrayList<>();
 
     public Usuario() {
     }
@@ -78,5 +85,13 @@ public class Usuario {
 
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
+    }
+
+    public List<Comunicados> getComunicados() {
+        return comunicados;
+    }
+
+    public void setComunicados(List<Comunicados> comunicados) {
+        this.comunicados = comunicados;
     }
 }

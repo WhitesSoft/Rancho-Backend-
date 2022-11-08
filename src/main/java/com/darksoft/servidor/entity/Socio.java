@@ -28,11 +28,13 @@ public class Socio {
     @Column(length = 100)
     private String direccion;
 
+    @Column(length = 200)
+    private String foto;
+
     @Column(length = 5)
     private boolean activo;
 
-    @Column(length = 100)
-    private Blob foto;
+
 
     //Relaciones
 
@@ -40,16 +42,20 @@ public class Socio {
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Medidor> medidores = new ArrayList<>();
 
+    //Relacion con solicitudes
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private List<Solicitudes> solicitudes = new ArrayList<>();
 
     public Socio() {
     }
 
-    public Socio(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, boolean activo) {
+    public Socio(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
+        this.foto = foto;
         this.activo = activo;
     }
 
@@ -109,11 +115,11 @@ public class Socio {
         this.activo = activo;
     }
 
-    public Blob getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Blob foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
@@ -123,5 +129,13 @@ public class Socio {
 
     public void setMedidores(List<Medidor> medidores) {
         this.medidores = medidores;
+    }
+
+    public List<Solicitudes> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(List<Solicitudes> solicitudes) {
+        this.solicitudes = solicitudes;
     }
 }

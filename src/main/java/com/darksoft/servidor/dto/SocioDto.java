@@ -11,19 +11,20 @@ public class SocioDto {
     private String correo;
     private String fechaNacimiento;
     private String direccion;
+    private String foto;
     private boolean activo;
-    private Blob foto;
-
+    
     public SocioDto(){
 
     }
 
-    public SocioDto(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, boolean activo) {
+    public SocioDto(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
+        this.foto = foto;
         this.activo = activo;
     }
 
@@ -67,6 +68,14 @@ public class SocioDto {
         this.direccion = direccion;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public boolean isActivo() {
         return activo;
     }
@@ -75,12 +84,5 @@ public class SocioDto {
         this.activo = activo;
     }
 
-    public Blob getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Blob foto) {
-        this.foto = foto;
-    }
 }
 

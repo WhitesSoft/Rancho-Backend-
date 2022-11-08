@@ -29,7 +29,7 @@ public class SocioController {
     }
 
     //Ver socio por id
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/detalles/{id}")
     public ResponseEntity<Socio> getById(@PathVariable("id") long id){
 
@@ -50,7 +50,7 @@ public class SocioController {
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
         Socio socio = new Socio(socioDto.getNombres(), socioDto.getApellidos(), socioDto.getCorreo(),
-                socioDto.getFechaNacimiento(), socioDto.getDireccion(), socioDto.isActivo());
+                socioDto.getFechaNacimiento(), socioDto.getDireccion(), socioDto.getFoto(), socioDto.isActivo());
 
         socioService.save(socio);
 
