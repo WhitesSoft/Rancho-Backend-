@@ -1,7 +1,6 @@
 package com.darksoft.servidor.entity;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +33,7 @@ public class Socio {
     @Column(length = 5)
     private boolean activo;
 
-
-
     //Relaciones
-
     //Relacion con medidor
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Medidor> medidores = new ArrayList<>();
