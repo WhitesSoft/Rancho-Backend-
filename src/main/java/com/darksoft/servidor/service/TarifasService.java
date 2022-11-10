@@ -40,4 +40,5 @@ public class TarifasService {
     public boolean existsById(long id){
         return tarifasRepository.existsById(id);
     }
+
 }
