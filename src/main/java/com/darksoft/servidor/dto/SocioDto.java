@@ -8,6 +8,7 @@ public class SocioDto {
     @NotNull
     private String nombres;
     private String apellidos;
+    private String cedula;
     private String correo;
     private String fechaNacimiento;
     private String direccion;
@@ -18,9 +19,10 @@ public class SocioDto {
 
     }
 
-    public SocioDto(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
+    public SocioDto(String nombres, String apellidos, String cedula, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.cedula = cedula;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
@@ -42,6 +44,14 @@ public class SocioDto {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getCorreo() {

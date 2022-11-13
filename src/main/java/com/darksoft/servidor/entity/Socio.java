@@ -18,6 +18,9 @@ public class Socio {
     @Column(length = 70)
     private String apellidos;
 
+    @Column
+    private String cedula;
+
     @Column(length = 100)
     private String correo;
 
@@ -45,9 +48,10 @@ public class Socio {
     public Socio() {
     }
 
-    public Socio(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
+    public Socio(String nombres, String apellidos, String cedula, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.cedula = cedula;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
@@ -77,6 +81,14 @@ public class Socio {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getCorreo() {
@@ -134,4 +146,5 @@ public class Socio {
     public void setSolicitudes(List<Solicitudes> solicitudes) {
         this.solicitudes = solicitudes;
     }
+
 }

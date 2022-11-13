@@ -4,6 +4,7 @@ import com.darksoft.servidor.dto.ConsumosDto;
 import com.darksoft.servidor.dto.MedidorDto;
 import com.darksoft.servidor.dto.Mensaje;
 import com.darksoft.servidor.entity.Consumos;
+import com.darksoft.servidor.entity.Factura;
 import com.darksoft.servidor.entity.Medidor;
 import com.darksoft.servidor.repository.ConsumosRepository;
 import com.darksoft.servidor.service.ConsumosService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class ConsumosController {
     MedidorService medidorService;
 
     //Listar todos los consumos
-    @PreAuthorize("hasRole('ADMINISTRADOR')") // SOLO UN ROL AUTORIZADO TIENE ACCESO
+    //@PreAuthorize("hasRole('ADMINISTRADOR')") // SOLO UN ROL AUTORIZADO TIENE ACCESO
     @GetMapping("/lista") //Nos datos esta url?
     public ResponseEntity<List<Consumos>> listarConsumos(){
         List<Consumos> listaConsumos = consumosService.getAllConsumos();
@@ -40,7 +42,7 @@ public class ConsumosController {
 
     //Listar todos los consumos por id del medidor
     //@PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/medidor/{id}/listaconsumo")
+    @GetMapping("/medidor/{id}/listaconsumos")
     public ResponseEntity<List<Consumos>> listarConsumosByMedidor(@PathVariable("id") Long id){
 
         //Verificamos si existe el medidor
@@ -74,8 +76,14 @@ public class ConsumosController {
 
         Consumos addConsumo = medidorService.getMedidor(id).map(medidor -> {
             consumos.setMedidor(medidor);
+            consumos.setFactura(consumos.getFactura());
+            consumosService.save(consumos);
             return consumosRepository.save(consumos);
         }).orElseThrow();
+
+//        Consumos consumos1 = new Consumos(consumos.getFecha(), consumos.getLectura(), consumos.getMedidor(), consumos.getFactura());
+//        consumosService.save(consumos1);
+
 
         new Mensaje("Consumo creado al medidor con el id: " + id);
 
