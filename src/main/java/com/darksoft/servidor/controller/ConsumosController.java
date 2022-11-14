@@ -1,19 +1,14 @@
 package com.darksoft.servidor.controller;
 
 import com.darksoft.servidor.dto.ConsumosDto;
-import com.darksoft.servidor.dto.MedidorDto;
 import com.darksoft.servidor.dto.Mensaje;
 import com.darksoft.servidor.entity.Consumos;
-import com.darksoft.servidor.entity.Factura;
-import com.darksoft.servidor.entity.Medidor;
 import com.darksoft.servidor.repository.ConsumosRepository;
 import com.darksoft.servidor.service.ConsumosService;
 import com.darksoft.servidor.service.MedidorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -80,10 +75,6 @@ public class ConsumosController {
             consumosService.save(consumos);
             return consumosRepository.save(consumos);
         }).orElseThrow();
-
-//        Consumos consumos1 = new Consumos(consumos.getFecha(), consumos.getLectura(), consumos.getMedidor(), consumos.getFactura());
-//        consumosService.save(consumos1);
-
 
         new Mensaje("Consumo creado al medidor con el id: " + id);
 
