@@ -49,7 +49,7 @@ public class SocioController {
         if(StringUtils.isBlank(socioDto.getNombres()))
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
-        Socio socio = new Socio(socioDto.getNombres(), socioDto.getApellidos(), socioDto.getCorreo(),
+        Socio socio = new Socio(socioDto.getNombres(), socioDto.getApellidos(), socioDto.getCedula(), socioDto.getCorreo(),
                 socioDto.getFechaNacimiento(), socioDto.getDireccion(), socioDto.getFoto(), socioDto.isActivo());
 
         socioService.save(socio);

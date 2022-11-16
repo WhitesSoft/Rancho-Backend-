@@ -1,7 +1,6 @@
 package com.darksoft.servidor.service;
 
 import com.darksoft.servidor.entity.Comunicados;
-import com.darksoft.servidor.entity.Solicitudes;
 import com.darksoft.servidor.repository.ComunicadosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class ComunicadosService {
     }
 
     //Listar todos los comunicados del usuario
-    public List<Comunicados> getAllComunicadosByUsuario(long id){
+    public List<Comunicados> getAllComunicadosByUsuario(long id)    {
         return comunicadosRepository.findByUsuario_Id(id);
     }
 

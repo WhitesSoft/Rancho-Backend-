@@ -3,6 +3,8 @@ package com.darksoft.servidor.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Medidor {
@@ -21,6 +23,10 @@ public class Medidor {
     @JoinColumn(name = "id_socio")
     @JsonIgnore
     private Socio socio;
+
+    //Relacion con consumo
+    @OneToMany(mappedBy = "medidor", cascade = CascadeType.ALL)
+    private List<Consumos> consumos = new ArrayList<>();
 
     public Medidor() {
     }
@@ -79,5 +85,13 @@ public class Medidor {
 
     public void setSocio(Socio socio) {
         this.socio = socio;
+    }
+
+    public List<Consumos> getConsumos() {
+        return consumos;
+    }
+
+    public void setConsumos(List<Consumos> consumos) {
+        this.consumos = consumos;
     }
 }

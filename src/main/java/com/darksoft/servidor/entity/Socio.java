@@ -1,7 +1,6 @@
 package com.darksoft.servidor.entity;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,9 @@ public class Socio {
     @Column(length = 70)
     private String apellidos;
 
+    @Column
+    private String cedula;
+
     @Column(length = 100)
     private String correo;
 
@@ -34,10 +36,7 @@ public class Socio {
     @Column(length = 5)
     private boolean activo;
 
-
-
     //Relaciones
-
     //Relacion con medidor
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Medidor> medidores = new ArrayList<>();
@@ -49,9 +48,10 @@ public class Socio {
     public Socio() {
     }
 
-    public Socio(String nombres, String apellidos, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
+    public Socio(String nombres, String apellidos, String cedula, String correo, String fechaNacimiento, String direccion, String foto, boolean activo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.cedula = cedula;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
@@ -81,6 +81,14 @@ public class Socio {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getCorreo() {
@@ -138,4 +146,5 @@ public class Socio {
     public void setSolicitudes(List<Solicitudes> solicitudes) {
         this.solicitudes = solicitudes;
     }
+
 }
