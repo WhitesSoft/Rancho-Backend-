@@ -13,7 +13,7 @@ public interface SolicitudesRepository extends JpaRepository<Solicitudes, Long> 
     //Listar solicitudes bajo el id del socio
     List<Solicitudes> findBySocio_IdSocio(long idSocio);
 
-    //Borrar todos los medidores del socio
+    //Borrar todos las solicitudes del socio
     @Transactional
     void deleteBySocio_IdSocio(long idSocio);
 

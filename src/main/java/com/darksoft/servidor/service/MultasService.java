@@ -16,9 +16,14 @@ public class MultasService {
     @Autowired
     MultasRepository multasRepository;
 
-    //Listar todas las multas
+    //Listar todas los multas
     public List<Multas> getAllMultas(){
         return multasRepository.findAll();
+    }
+
+    //Listar todas los multas del socio
+    public List<Multas> getAllMultasBySocio(long id){
+        return multasRepository.findBySocio_IdSocio(id);
     }
 
     //Obtener una multa especifica
@@ -26,7 +31,7 @@ public class MultasService {
         return multasRepository.findById(id);
     }
 
-    //Guarda multa
+    //Guardar multa
     public void save(Multas multas){
         multasRepository.save(multas);
     }
@@ -34,6 +39,11 @@ public class MultasService {
     //Borrar multa
     public void delete(long id){
         multasRepository.deleteById(id);
+    }
+
+    //Borrar todas las multas del socio
+    public void deleteAllMultasBySocio(long id){
+        multasRepository.deleteBySocio_IdSocio(id);
     }
 
     //Existe multa por id?

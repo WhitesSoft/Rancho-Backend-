@@ -1,7 +1,7 @@
 package com.darksoft.servidor.repository;
 
-import com.darksoft.servidor.entity.Medidor;
-import com.darksoft.servidor.entity.Multas;
+import com.darksoft.servidor.entity.Reclamos;
+import com.darksoft.servidor.entity.Solicitudes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface MultasRepository extends JpaRepository<Multas, Long> {
+public interface ReclamosRepository extends JpaRepository<Reclamos, Long> {
 
-    //Listar multas bajo el id del socio
-    List<Multas> findBySocio_IdSocio(long idSocio);
+    //Listar reclamos bajo el id del socio
+    List<Reclamos> findBySocio_IdSocio(long idSocio);
 
-    //Borrar todas las multas del socio
+    //Borrar todos los reclamos del socio
     @Transactional
     void deleteBySocio_IdSocio(long idSocio);
 

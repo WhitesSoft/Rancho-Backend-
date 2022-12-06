@@ -1,10 +1,8 @@
 package com.darksoft.servidor.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Multas {
@@ -16,9 +14,16 @@ public class Multas {
     private String fechaVigencia;
     private float monto;
 
+    //Relaciones
+    //Relacion con socio
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_socio")
+    @JsonIgnore
+    private Socio socio;
+
     public Multas(){}
 
-    public Multas(String fechaVigencia, float monto) {
+    public Multas(String fechaVigencia, float monto, Socio socio) {
         this.fechaVigencia = fechaVigencia;
         this.monto = monto;
     }
@@ -45,6 +50,14 @@ public class Multas {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Solicitudes {
 
     @Id
@@ -69,4 +70,5 @@ public class Solicitudes {
     public void setSocio(Socio socio) {
         this.socio = socio;
     }
+
 }
