@@ -13,6 +13,7 @@ public class Multas {
 
     private String fechaVigencia;
     private float monto;
+    private boolean estado;
 
     //Relaciones
     //Relacion con socio
@@ -23,9 +24,11 @@ public class Multas {
 
     public Multas(){}
 
-    public Multas(String fechaVigencia, float monto, Socio socio) {
+    public Multas(String fechaVigencia, float monto, boolean estado, Socio socio) {
         this.fechaVigencia = fechaVigencia;
         this.monto = monto;
+        this.estado = estado;
+        this.socio = socio;
     }
 
     public long getId() {
@@ -50,6 +53,14 @@ public class Multas {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public Socio getSocio() {

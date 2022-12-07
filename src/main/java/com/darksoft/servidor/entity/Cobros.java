@@ -15,7 +15,7 @@ public class Cobros {
     //Relaciones
     //Relacion con Factura
     //Este es el dueno de la tabla con factura
-    @OneToOne(cascade = {CascadeType.ALL}) //cascade hace que cree los datos de la tabla socio si no existe
+    @OneToOne
     @JoinColumn(name = "id_factura")
     private Factura factura;
 

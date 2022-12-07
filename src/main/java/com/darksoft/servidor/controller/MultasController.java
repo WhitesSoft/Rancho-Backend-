@@ -37,7 +37,7 @@ public class MultasController {
 
     //Listar todas las multas por id del socio
     //@PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/socio/{idSocio}/listamedidores")
+    @GetMapping("/socio/{idSocio}/listamultas")
     public ResponseEntity<List<Multas>> listarMultasBySocio(@PathVariable("idSocio") Long id){
 
         //Verificamos si existe el socio
@@ -90,6 +90,7 @@ public class MultasController {
         Multas multas = multasService.getMulta(id).get();
         multas.setMonto(multasDto.getMonto());
         multas.setFechaVigencia(multasDto.getFechaVigencia());
+        multas.setEstado(multasDto.isEstado());
 
         multasService.save(multas);
 
