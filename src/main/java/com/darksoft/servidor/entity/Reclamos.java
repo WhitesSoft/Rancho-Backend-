@@ -1,25 +1,35 @@
 package com.darksoft.servidor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
-public class Reclamos extends Solicitudes {
+public class Reclamos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String detalle;
+    private String fecha;
     private String fechaAtencion;
-    private String resultado;
+    private boolean atendido;
 
-    public Reclamos(String detalle, String fecha, boolean atendido, Socio socio, String fechaAtencion, String resultado) {
-        super(detalle, fecha, atendido, socio);
+    //Relacion con socio
+    @ManyToOne
+    @JoinColumn(name = "id_socio")
+    @JsonIgnore
+    private Socio socio;
+
+    public Reclamos() {}
+
+    public Reclamos(String detalle, String fecha, String fechaAtencion, boolean atendido, Socio socio) {
+        this.detalle = detalle;
+        this.fecha = fecha;
         this.fechaAtencion = fechaAtencion;
-        this.resultado = resultado;
-    }
-
-    public Reclamos() {
-
+        this.atendido = atendido;
+        this.socio = socio;
     }
 
     public long getId() {
@@ -30,6 +40,22 @@ public class Reclamos extends Solicitudes {
         this.id = id;
     }
 
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     public String getFechaAtencion() {
         return fechaAtencion;
     }
@@ -38,12 +64,20 @@ public class Reclamos extends Solicitudes {
         this.fechaAtencion = fechaAtencion;
     }
 
-    public String getResultado() {
-        return resultado;
+    public boolean isAtendido() {
+        return atendido;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+    public void setAtendido(boolean atendido) {
+        this.atendido = atendido;
+    }
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
 }

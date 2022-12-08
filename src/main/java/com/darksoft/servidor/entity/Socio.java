@@ -45,6 +45,10 @@ public class Socio {
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Solicitudes> solicitudes = new ArrayList<>();
 
+    //Relacion con reclamos
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private List<Reclamos> reclamos = new ArrayList<>();
+
     //Relacion con multas
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Multas> multas = new ArrayList<>();
@@ -149,6 +153,14 @@ public class Socio {
 
     public void setSolicitudes(List<Solicitudes> solicitudes) {
         this.solicitudes = solicitudes;
+    }
+
+    public List<Reclamos> getReclamos() {
+        return reclamos;
+    }
+
+    public void setReclamos(List<Reclamos> reclamos) {
+        this.reclamos = reclamos;
     }
 
     public List<Multas> getMultas() {

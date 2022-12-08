@@ -1,7 +1,6 @@
 package com.darksoft.servidor.repository;
 
 import com.darksoft.servidor.entity.Reclamos;
-import com.darksoft.servidor.entity.Solicitudes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

@@ -92,7 +92,6 @@ public class ReclamosController {
         reclamos.setFecha(reclamosDto.getFecha());
         reclamos.setAtendido(reclamosDto.isAtendido());
         reclamos.setFechaAtencion(reclamosDto.getFechaAtencion());
-        reclamos.setResultado(reclamosDto.getResultado());
 
         reclamosService.save(reclamos);
 
@@ -109,7 +108,7 @@ public class ReclamosController {
 
         reclamosService.delete(id);
 
-        return new ResponseEntity<>(new Mensaje("Solicitud eliminada"), HttpStatus.OK);
+        return new ResponseEntity<>(new Mensaje("Reclamo eliminado"), HttpStatus.OK);
     }
 
     //Eliminar todos los reclamos del socio
