@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
 public class Usuario {
 
@@ -19,8 +18,8 @@ public class Usuario {
 
     @Column(unique = true)
     private String usuario;
-
     private String password;
+    private boolean estadoPassword;
 
     //Relaciones
     //Este es el dueno de la tabla con socio
@@ -41,9 +40,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String usuario, String password, Socio socio) {
+    public Usuario(String usuario, String password, boolean estadoPassword, Socio socio) {
         this.usuario = usuario;
         this.password = password;
+        this.estadoPassword = estadoPassword;
         this.socio = socio;
     }
 
@@ -69,6 +69,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEstadoPassword() {
+        return estadoPassword;
+    }
+
+    public void setEstadoPassword(boolean estadoPassword) {
+        this.estadoPassword = estadoPassword;
     }
 
     public Socio getSocio() {

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class Solicitudes {
+public class Reclamos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +13,7 @@ public class Solicitudes {
 
     private String detalle;
     private String fecha;
+    private String fechaAtencion;
     private boolean atendido;
 
     //Relacion con socio
@@ -21,11 +22,12 @@ public class Solicitudes {
     @JsonIgnore
     private Socio socio;
 
-    public Solicitudes(){}
+    public Reclamos() {}
 
-    public Solicitudes(String detalle, String fecha, boolean atendido, Socio socio) {
+    public Reclamos(String detalle, String fecha, String fechaAtencion, boolean atendido, Socio socio) {
         this.detalle = detalle;
         this.fecha = fecha;
+        this.fechaAtencion = fechaAtencion;
         this.atendido = atendido;
         this.socio = socio;
     }
@@ -52,6 +54,14 @@ public class Solicitudes {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getFechaAtencion() {
+        return fechaAtencion;
+    }
+
+    public void setFechaAtencion(String fechaAtencion) {
+        this.fechaAtencion = fechaAtencion;
     }
 
     public boolean isAtendido() {

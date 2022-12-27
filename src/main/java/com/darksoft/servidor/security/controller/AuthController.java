@@ -49,13 +49,14 @@ public class AuthController {
     //Crear usuario
     @PostMapping("/nuevo")
     public ResponseEntity<?> crearUsuario(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
+
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
 
         if (usuarioService.existsByUsuario(nuevoUsuario.getUsuario()))
             return new ResponseEntity(new Mensaje("Nombre de usuario existente"), HttpStatus.BAD_REQUEST);
 
-        Usuario usuario = new Usuario(nuevoUsuario.getUsuario(), passwordEncoder.encode(nuevoUsuario.getPassword()), nuevoUsuario.getSocio());
+        Usuario usuario = new Usuario(nuevoUsuario.getUsuario(), passwordEncoder.encode(nuevoUsuario.getPassword()), nuevoUsuario.isEstadoPassword(), nuevoUsuario.getSocio());
 
         //Todos los usuarios por defecto seran usuarios BASICOS
         Set<Rol> roles = new HashSet<>();

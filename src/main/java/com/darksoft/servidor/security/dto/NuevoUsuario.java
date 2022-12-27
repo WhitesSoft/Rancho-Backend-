@@ -11,6 +11,7 @@ public class NuevoUsuario {
     @NotNull
     private String usuario;
     private String password;
+    private boolean estadoPassword;
     private Socio socio;
     private Set<String> roles = new HashSet<>();
 
@@ -28,6 +29,14 @@ public class NuevoUsuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEstadoPassword() {
+        return estadoPassword;
+    }
+
+    public void setEstadoPassword(boolean estadoPassword) {
+        this.estadoPassword = estadoPassword;
     }
 
     public Socio getSocio() {

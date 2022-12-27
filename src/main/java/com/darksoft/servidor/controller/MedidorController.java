@@ -125,4 +125,5 @@ public class MedidorController {
         return new ResponseEntity(new Mensaje("Medidores borrados"), HttpStatus.OK);
 
     }
+
 }

@@ -1,41 +1,23 @@
-package com.darksoft.servidor.entity;
+package com.darksoft.servidor.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.darksoft.servidor.entity.Socio;
 
-import javax.persistence.*;
-
-@Entity
-public class Solicitudes {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class ReclamosDto {
 
     private String detalle;
     private String fecha;
+    private String fechaAtencion;
     private boolean atendido;
-
-    //Relacion con socio
-    @ManyToOne
-    @JoinColumn(name = "id_socio")
-    @JsonIgnore
     private Socio socio;
 
-    public Solicitudes(){}
+    public ReclamosDto() {}
 
-    public Solicitudes(String detalle, String fecha, boolean atendido, Socio socio) {
+    public ReclamosDto(String detalle, String fecha, String fechaAtencion, boolean atendido, Socio socio) {
         this.detalle = detalle;
         this.fecha = fecha;
+        this.fechaAtencion = fechaAtencion;
         this.atendido = atendido;
         this.socio = socio;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getDetalle() {
@@ -52,6 +34,14 @@ public class Solicitudes {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getFechaAtencion() {
+        return fechaAtencion;
+    }
+
+    public void setFechaAtencion(String fechaAtencion) {
+        this.fechaAtencion = fechaAtencion;
     }
 
     public boolean isAtendido() {

@@ -110,7 +110,7 @@ public class SolicitudesController {
         return new ResponseEntity<>(new Mensaje("Solicitud eliminada"), HttpStatus.OK);
     }
 
-    //Eliminar todos los medidores del socio
+    //Eliminar todos las solicitudes del socio
     @DeleteMapping("/socio/{idSocio}/eliminarsolicitudes")
     public ResponseEntity<List<Solicitudes>> eliminarSolicitudesBySocio (@PathVariable("idSocio") long id){
 

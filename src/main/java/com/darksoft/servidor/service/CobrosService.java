@@ -41,6 +41,4 @@ public class CobrosService {
         return cobrosRepository.existsById(id);
     }
 
-
-
 }

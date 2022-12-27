@@ -16,5 +16,6 @@ public interface MedidorRepository extends JpaRepository<Medidor, Long> {
     //Borrar todos los medidores del socio
     @Transactional
     void deleteBySocio_IdSocio(long idSocio);
+
 }
 

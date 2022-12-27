@@ -5,6 +5,7 @@ import com.darksoft.servidor.dto.MultasDto;
 import com.darksoft.servidor.entity.Multas;
 import com.darksoft.servidor.repository.MultasRepository;
 import com.darksoft.servidor.service.MultasService;
+import com.darksoft.servidor.service.SocioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +24,29 @@ public class MultasController {
     @Autowired
     MultasRepository multasRepository;
 
+    @Autowired
+    SocioService socioService;
+
     //Listar todas las multas
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping("/lista")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')") // SOLO UN ROL AUTORIZADO TIENE ACCESO
+    @GetMapping("/lista") //Nos datos esta url?
     public ResponseEntity<List<Multas>> listarMultas(){
         List<Multas> listaMultas = multasService.getAllMultas();
         return new ResponseEntity<>(listaMultas, HttpStatus.OK);
+    }
+
+    //Listar todas las multas por id del socio
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/socio/{idSocio}/listamultas")
+    public ResponseEntity<List<Multas>> listarMultasBySocio(@PathVariable("idSocio") Long id){
+
+        //Verificamos si existe el socio
+        if(!socioService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe el socio"), HttpStatus.NOT_FOUND);
+
+        List<Multas> listaMultasBySocio = multasService.getAllMultasBySocio(id);
+        return new ResponseEntity<>(listaMultasBySocio, HttpStatus.OK);
+
     }
 
     //Ver multa por id
@@ -43,29 +61,36 @@ public class MultasController {
         return new ResponseEntity<>(multas, HttpStatus.OK);
     }
 
-    //Crear multa
-    @PostMapping("/crearmulta")
-    public ResponseEntity<?> crearMulta(@RequestBody MultasDto multasDto) {
+    //Crear multa para socio
+    @PostMapping("/socio/{idSocio}/crearmulta")
+    public ResponseEntity<Multas> crearMulta (@PathVariable("idSocio") Long id, @RequestBody Multas multas) {
 
-        Multas multas =
-                new Multas(multasDto.getFechaVigencia(), multasDto.getMonto());
+        //Verificamos si existe el socio
+        if(!socioService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe el socio"), HttpStatus.NOT_FOUND);
 
-        multasService.save(multas);
+        Multas addMulta = socioService.getSocio(id).map(socio -> {
+            multas.setSocio(socio);
+            return multasRepository.save(multas);
+        }).orElseThrow();
 
-        return new ResponseEntity<>(new Mensaje("Multa creada"), HttpStatus.OK);
+        new Mensaje("Multa creado al socio con el id: " + id);
+
+        return new ResponseEntity<>(addMulta, HttpStatus.OK);
     }
 
-    //Actualizar multa
+    //Actualizar medidor
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<?> actualizarMulta (@PathVariable("id") long id, @RequestBody MultasDto multasDto){
 
-        //primero verificamos si existe la multa
+        //primero verificamos si existe el medidor
         if(!multasService.existsById(id)) //Si no existe returnamos un mensaje
             return new ResponseEntity(new Mensaje("No existe la multa"), HttpStatus.NOT_FOUND);
 
         Multas multas = multasService.getMulta(id).get();
-        multas.setFechaVigencia(multasDto.getFechaVigencia());
         multas.setMonto(multasDto.getMonto());
+        multas.setFechaVigencia(multasDto.getFechaVigencia());
+        multas.setEstado(multasDto.isEstado());
 
         multasService.save(multas);
 
@@ -74,15 +99,29 @@ public class MultasController {
 
     //Eliminar multa
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarMulta(@PathVariable("id") long id){
+    public ResponseEntity<?> eliminarMulta (@PathVariable("id") long id){
 
-        //primero verificamos si existe la multa
+        //primero verificamos si existe el medidor
         if(!multasService.existsById(id)) //Si no existe returnamos un mensaje
             return new ResponseEntity(new Mensaje("No existe la multa"), HttpStatus.NOT_FOUND);
 
         multasService.delete(id);
 
         return new ResponseEntity<>(new Mensaje("Multa eliminada"), HttpStatus.OK);
+    }
+
+    //Eliminar todas las multas del socio
+    @DeleteMapping("/socio/{idSocio}/eliminarmultas")
+    public ResponseEntity<List<Multas>> eliminarMultasBySocio (@PathVariable("idSocio") long id){
+
+        //primero verificamos si existe el socio
+        if(!socioService.existsById(id)) //Si no existe returnamos un mensaje
+            return new ResponseEntity(new Mensaje("No existe el socio"), HttpStatus.NOT_FOUND);
+
+        multasService.deleteAllMultasBySocio(id);
+
+        return new ResponseEntity(new Mensaje("Multas borradas"), HttpStatus.OK);
+
     }
 
 }
